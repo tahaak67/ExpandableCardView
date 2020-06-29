@@ -1,4 +1,4 @@
-package com.alespero.expandablecardview;
+package com.taha.expandablecardview;
 
 import org.junit.Test;
 

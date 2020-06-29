@@ -1,10 +1,11 @@
-package com.alespero.expandablecardview
+package com.taha.expandablecardview
 
 
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.os.Handler
 import androidx.core.content.ContextCompat
 import android.text.TextUtils
 import android.util.AttributeSet
@@ -17,8 +18,6 @@ import android.view.animation.Transformation
 import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.alespero.expandablecardview.R.id.card_header
-import com.alespero.expandablecardview.R.id.card_title
 import kotlinx.android.synthetic.main.expandable_cardview.view.*
 
 /**
@@ -52,7 +51,9 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var typedArray: TypedArray? = null
     private var innerViewRes: Int = 0
     private var iconDrawable: Drawable? = null
-
+    private var arrowDrawable: Drawable? = null
+    private var expandedArrowDrawable: Drawable? = null
+    private var isArrowAnimated:Boolean = true
     var animDuration = DEFAULT_ANIM_DURATION.toLong()
 
     var isExpanded = false
@@ -95,10 +96,13 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         this@ExpandableCardView.typedArray = typedArray
         title = typedArray.getString(R.styleable.ExpandableCardView_title)
         iconDrawable = typedArray.getDrawable(R.styleable.ExpandableCardView_icon)
+        arrowDrawable = typedArray.getDrawable(R.styleable.ExpandableCardView_arrow)
+        expandedArrowDrawable = typedArray.getDrawable(R.styleable.ExpandableCardView_expandedArrow)
         innerViewRes = typedArray.getResourceId(R.styleable.ExpandableCardView_inner_view, View.NO_ID)
         expandOnClick = typedArray.getBoolean(R.styleable.ExpandableCardView_expandOnClick, false)
         animDuration = typedArray.getInteger(R.styleable.ExpandableCardView_animationDuration, DEFAULT_ANIM_DURATION).toLong()
         startExpanded = typedArray.getBoolean(R.styleable.ExpandableCardView_startExpanded, false)
+        isArrowAnimated = typedArray.getBoolean(R.styleable.ExpandableCardView_arrowAnimated, true)
         typedArray.recycle()
     }
 
@@ -106,11 +110,12 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         super.onFinishInflate()
 
         //Setting attributes
-        if (! TextUtils.isEmpty(title)) card_title.text = title
+        if (!TextUtils.isEmpty(title)) card_title.text = title
 
         iconDrawable?.let { drawable ->
             card_header.visibility = View.VISIBLE
             card_icon.background = drawable
+            card_icon.visibility = View.VISIBLE
         }
 
         setInnerView(innerViewRes)
@@ -119,8 +124,9 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             elevation = Utils.convertDpToPixels(context, 4f)
 
         if (startExpanded) {
-            animDuration = 0
-            expand()
+            Handler().postDelayed({
+                expand()
+            }, 500)
         }
 
         if (expandOnClick) {
@@ -132,7 +138,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     fun expand() {
         val initialHeight = card_layout.height
-        if (! isMoving) {
+        if (!isMoving) {
             previousHeight = initialHeight
         }
 
@@ -144,6 +150,9 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                     targetHeight - initialHeight,
                     EXPANDING)
         }
+        expandedArrowDrawable?.let { arrowImage ->
+            card_arrow.setImageDrawable(arrowImage)
+        }
     }
 
     fun collapse() {
@@ -152,6 +161,9 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             animateViews(initialHeight,
                     initialHeight - previousHeight,
                     COLLAPSING)
+        }
+        arrowDrawable?.let { arrowImage ->
+            card_arrow.setImageDrawable(arrowImage)
         }
     }
 
@@ -209,7 +221,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
         startAnimation(expandAnimation)
         Log.d("SO", "Started animation: " + if (animationType == EXPANDING) "Expanding" else "Collapsing")
-        card_arrow.startAnimation(arrowAnimation)
+        if (isArrowAnimated)
+            card_arrow.startAnimation(arrowAnimation)
         isExpanded = animationType == EXPANDING
 
     }

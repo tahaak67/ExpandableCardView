@@ -52,7 +52,7 @@
     android:background="#FAFAFA">
 
 
-<com.alespero.expandablecardview.ExpandableCardView
+<com.taha.expandablecardview.ExpandableCardView
     android:id="@+id/main_profile_card"
     android:layout_marginLeft="20dp"
     android:layoutDirection="rtl"
@@ -67,7 +67,7 @@
     app:startExpanded="true"
     app:expandOnClick="true" />
 
-    <com.alespero.expandablecardview.ExpandableCardView
+    <com.taha.expandablecardview.ExpandableCardView
         android:id="@+id/main_location"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -80,7 +80,7 @@
         app:inner_view="@layout/location"
         app:expandOnClick="true"/>
 
-    <com.alespero.expandablecardview.ExpandableCardView
+    <com.taha.expandablecardview.ExpandableCardView
         android:id="@+id/main_dates"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
