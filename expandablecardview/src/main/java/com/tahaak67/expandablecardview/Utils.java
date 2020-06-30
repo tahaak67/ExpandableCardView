@@ -1,4 +1,4 @@
-package com.taha.expandablecardview;
+package com.tahaak67.expandablecardview;
 
 import android.content.Context;
 import android.content.res.Resources;

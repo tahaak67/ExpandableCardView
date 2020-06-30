@@ -48,11 +48,11 @@
     android:paddingBottom="20dp"
     android:orientation="vertical"
     android:clipChildren="false"
-    tools:context="com.alessandrosperotti.expandablecardviewexample.MainActivity"
+    tools:context="com.tahaak67.expandablecardviewexample.MainActivity"
     android:background="#FAFAFA">
 
 
-<com.taha.expandablecardview.ExpandableCardView
+<com.tahaak67.expandablecardview.ExpandableCardView
     android:id="@+id/main_profile_card"
     android:layout_marginLeft="20dp"
     android:layoutDirection="rtl"
@@ -67,7 +67,7 @@
     app:startExpanded="true"
     app:expandOnClick="true" />
 
-    <com.taha.expandablecardview.ExpandableCardView
+    <com.tahaak67.expandablecardview.ExpandableCardView
         android:id="@+id/main_location"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -80,7 +80,7 @@
         app:inner_view="@layout/location"
         app:expandOnClick="true"/>
 
-    <com.taha.expandablecardview.ExpandableCardView
+    <com.tahaak67.expandablecardview.ExpandableCardView
         android:id="@+id/main_dates"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"

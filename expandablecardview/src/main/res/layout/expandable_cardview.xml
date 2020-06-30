@@ -44,13 +44,13 @@
 
                 <ImageButton
                     android:id="@+id/card_arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
                     android:background="?selectableItemBackgroundBorderless"
-                    android:src="@drawable/arrow_down"
-                    android:contentDescription="@string/expandable_card_view_image_content_description"/>
+                    android:contentDescription="@string/expandable_card_view_image_content_description"
+                    android:src="@drawable/arrow_down" />
 
             </RelativeLayout>
 

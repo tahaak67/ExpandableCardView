@@ -1,4 +1,4 @@
-package com.alessandrosperotti.expandablecardviewexample
+package com.tahaak67.expandablecardviewexample
 
 import android.content.res.ColorStateList
 import android.graphics.Color
