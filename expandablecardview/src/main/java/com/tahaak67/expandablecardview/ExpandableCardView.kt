@@ -3,22 +3,24 @@ package com.tahaak67.expandablecardview
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.os.Handler
-import androidx.core.content.ContextCompat
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.view.animation.Transformation
 import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.expandable_cardview.view.*
+
 
 /**
  *
@@ -54,6 +56,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var arrowDrawable: Drawable? = null
     private var expandedArrowDrawable: Drawable? = null
     private var isArrowAnimated:Boolean = true
+    private var cardBackgroundColor:Int? = null
     var animDuration = DEFAULT_ANIM_DURATION.toLong()
 
     var isExpanded = false
@@ -86,9 +89,9 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     }
 
     private fun initView(context: Context) {
-        //Inflating View
         LayoutInflater.from(context).inflate(R.layout.expandable_cardview, this)
     }
+
 
     private fun initAttributes(context: Context, attrs: AttributeSet) {
         //Ottengo attributi
@@ -103,6 +106,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         animDuration = typedArray.getInteger(R.styleable.ExpandableCardView_animationDuration, DEFAULT_ANIM_DURATION).toLong()
         startExpanded = typedArray.getBoolean(R.styleable.ExpandableCardView_startExpanded, false)
         isArrowAnimated = typedArray.getBoolean(R.styleable.ExpandableCardView_arrowAnimated, true)
+        cardBackgroundColor = typedArray.getColor(R.styleable.ExpandableCardView_cardBackgroundColor,Color.WHITE)
         typedArray.recycle()
     }
 
@@ -118,22 +122,28 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             card_icon.visibility = View.VISIBLE
         }
 
+        arrowDrawable?.let { arrowImage ->
+            card_arrow.setImageDrawable(arrowImage)
+        }
+
         setInnerView(innerViewRes)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             elevation = Utils.convertDpToPixels(context, 4f)
 
         if (startExpanded) {
-            Handler().postDelayed({
+            card_layout.post {
                 expand()
-            }, 500)
+            }
         }
 
         if (expandOnClick) {
             card_layout.setOnClickListener(defaultClickListener)
             card_arrow.setOnClickListener(defaultClickListener)
         }
-
+        cardBackgroundColor?.let {
+            card_layout.setCardBackgroundColor(it)
+        }
     }
 
     fun expand() {

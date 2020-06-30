@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
-
             R.id.aboutme -> {
                 uri = Uri.parse("https://www.alessandrosperotti.com")
                 intent = Intent(Intent.ACTION_VIEW, uri)

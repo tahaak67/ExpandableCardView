@@ -10,5 +10,6 @@
         <attr name="animationDuration" format="integer"/>
         <attr name="startExpanded" format="boolean"/>
         <attr name="arrowAnimated" format="boolean"/>
+        <attr name="cardBackgroundColor" format="color"/>
     </declare-styleable>
 </resources>
