@@ -43,14 +43,13 @@
                 android:textSize="16sp"
                 tools:text="Prova" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/card_arrow"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="20dp"
-                android:background="?selectableItemBackgroundBorderless"
-                android:contentDescription="@string/expandable_card_view_image_content_description"
+                android:background="?android:selectableItemBackground"                android:contentDescription="@string/expandable_card_view_image_content_description"
                 android:src="@drawable/arrow_down" />
 
         </RelativeLayout>

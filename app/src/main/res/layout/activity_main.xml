@@ -59,11 +59,13 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:layoutDirection="rtl"
+        app:titleTextAppearance="@style/fontForTitle"
+        app:titleTextColor="#F44336"
         app:expandOnClick="true"
         app:icon="@drawable/ic_person"
         app:inner_view="@layout/passengers"
         app:startExpanded="true"
-        app:title="Passengers" />
+        app:title="مرحبا" />
 
     <com.tahaak67.expandablecardview.ExpandableCardView
         android:id="@+id/main_location"
@@ -74,10 +76,11 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         app:cardBackgroundColor="#CDDC39"
+        app:arrow="@drawable/image_arrow"
         app:expandOnClick="true"
         app:icon="@drawable/ic_location"
         app:inner_view="@layout/location"
-        app:title="Location" />
+        app:title="مرحبا" />
 
     <com.tahaak67.expandablecardview.ExpandableCardView
         android:id="@+id/main_dates"

@@ -11,5 +11,7 @@
         <attr name="startExpanded" format="boolean"/>
         <attr name="arrowAnimated" format="boolean"/>
         <attr name="cardBackgroundColor" format="color"/>
+        <attr name="titleTextAppearance" format="reference"/>
+        <attr name="titleTextColor" format="color"/>
     </declare-styleable>
 </resources>

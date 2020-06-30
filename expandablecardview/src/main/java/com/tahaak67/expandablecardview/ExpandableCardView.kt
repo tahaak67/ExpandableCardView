@@ -57,6 +57,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var expandedArrowDrawable: Drawable? = null
     private var isArrowAnimated:Boolean = true
     private var cardBackgroundColor:Int? = null
+    private var titleTextColor:Int? = null
+    private var titleTextAppearance: Int?= null
     var animDuration = DEFAULT_ANIM_DURATION.toLong()
 
     var isExpanded = false
@@ -107,6 +109,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         startExpanded = typedArray.getBoolean(R.styleable.ExpandableCardView_startExpanded, false)
         isArrowAnimated = typedArray.getBoolean(R.styleable.ExpandableCardView_arrowAnimated, true)
         cardBackgroundColor = typedArray.getColor(R.styleable.ExpandableCardView_cardBackgroundColor,Color.WHITE)
+        titleTextAppearance = typedArray.getResourceId(R.styleable.ExpandableCardView_titleTextAppearance,R.style.TextAppearance_AppCompat)
+        titleTextColor = typedArray.getColor(R.styleable.ExpandableCardView_titleTextColor,Color.BLACK)
         typedArray.recycle()
     }
 
@@ -124,6 +128,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
         arrowDrawable?.let { arrowImage ->
             card_arrow.setImageDrawable(arrowImage)
+            card_arrow.background = null
         }
 
         setInnerView(innerViewRes)
@@ -143,6 +148,14 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         }
         cardBackgroundColor?.let {
             card_layout.setCardBackgroundColor(it)
+        }
+        titleTextAppearance?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                card_title.setTextAppearance(it)
+            }
+        }
+        titleTextColor?.let {
+            card_title.setTextColor(it)
         }
     }
 
