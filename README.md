@@ -1,16 +1,16 @@
 # ExpandableCardView
 
-[ ![Download](https://api.bintray.com/packages/alespero/ExpandableCardView/ExpandableCardView/images/download.svg?version=0.8) ](https://bintray.com/alespero/ExpandableCardView/ExpandableCardView/0.8/link)
+[![](https://jitpack.io/v/tahaak67/ExpandableCardView.svg)](https://jitpack.io/#tahaak67/ExpandableCardView)
+
+
 
 ![Example Gif](demo.gif)
+
+This is a more coustomizable version of [AleSpero/ExpandableCardView](https://github.com/AleSpero/ExpandableCardView)
 
 An Android library that lets you create in a simple, fast and hassle-free way a CardView in which you can insert your custom layout and just expand and collapse without even writing a single Java/Kotlin line of code.
 
 This component follows the [Material Design Guidelines](https://material.io/guidelines/).
-
-## Searching for someone who wants to mantain this library! If you're interested, please send me an email.
-
-### Important: due to time issues, in the near future there will not be any kind of updates or fixes. PR however will be reviewed and very much appreciated.
 
 ## Demo
 
@@ -18,35 +18,62 @@ Get it on the [Google Play Store](https://play.google.com/store/apps/details?id=
 
 # Setup
 
-First of all, include the dependency in your app build.gradle:
-
-```gradle
-compile 'com.alespero:expandable-cardview:0.8'
+First of all, add jitpack maven to your root build.gradle file
 ```
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+Then include the dependency in your app build.gradle:
 
-Or get the aar in the [Releases](https://github.com/AleSpero/ExpandableCardView/releases) section.
+```
+dependencies {
+	        implementation 'com.github.tahaak67:ExpandableCardView:0.6.5-beta4'
+	}
+```
 
 ## Declaring the view
 
 After you have the Library correctly setup, just declare the ExpandableCardView in your xml:
 
 ```xml
-<com.alespero.expandablecardview.ExpandableCardView
-    android:id="@+id/profile"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:title="Passengers"
-    app:icon="@drawable/ic_person"
-    app:inner_view="@layout/mycustomview"
-    app:expandOnClick="true"
-    app:animationDuration="300"
-    app:startExpanded="false"/>
+   <com.tahaak67.expandablecardview.ExpandableCardView
+      android:id="@+id/myCardView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:arrow="@drawable/collapsed_arrow"
+      app:arrowAnimated="true"
+      app:cardBackgroundColor="@color/colorSecondary"
+      app:expandedArrow="@drawable/expanded_arrow"
+      app:inner_view="@layout/my_inner_view"
+      app:startExpanded="true"
+      app:titleTextAppearance="@style/cardTitleStyle"
+      app:titleTextColor="@color/mainTextColor" />
 ```
 The only required attributes are `inner_view` and `title`. The other attributes are optional.
 
 You can specify a custom title and icon on the header on the card by setting the attribute ```app:title``` and  ```app:icon``` respectively.
 
 After you created the base xml, just create your custom layout and place it inside your ```layout``` folder.
+
+Additional attributes:
+
+-```app::arrow``` change the arrow to an image or your choice
+
+-```app::arrowAnimated``` enable or disable the animation of the arrow when expanding/collapsing
+
+-```app::cardBackgroundColor``` change the background color of the card
+
+-```app::expandedArrow``` change the arrow image when the card is expanded
+
+-```app::titleTextAppearance``` change the style of the title text (Requires API 23/aka Marshmellow or newer)
+
+-```app::titleTextColor``` change the title text color
+
+
 
 Now just pass your newly created layout resource to the ```app:inner_view``` attribute. By setting the attribute ```app:expandOnClick="true"``` the card will have a default behaviour (expand/collapse on click); By setting the `animationDuration` attribute you can set a custom animation time, and by setting the `startExpanded` attribute the card will be automatically expanded when inflated.
 
@@ -119,6 +146,10 @@ Made By [Alessandro Sperotti](www.alessandrosperotti.com).
 
 alessandrosperotti at gmail dot com
 
-If you liked this library, why don't you offer me a coffee (or a beer? :D)
+Costumized version made by me :) [Taha Ben Ashur](https://699taha.blogspot.com/)
+
+
+
+If you liked this library, why don't you offer Alessandro a coffee ? :D
 
 ETH: 0x70b6b9eaCDf6f76ECb92bE3fb81d72B3971BA1Bc
