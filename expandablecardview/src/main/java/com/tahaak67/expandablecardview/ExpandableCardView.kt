@@ -134,7 +134,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         setInnerView(innerViewRes)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            elevation = Utils.convertDpToPixels(context, 4f)
+            elevation = Utils.convertDpToPixels(context, 0f)
 
         if (startExpanded) {
             card_layout.post {
