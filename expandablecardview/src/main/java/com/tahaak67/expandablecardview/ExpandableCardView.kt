@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.view.animation.Transformation
@@ -59,6 +60,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var cardBackgroundColor:Int? = null
     private var titleTextColor:Int? = null
     private var titleTextAppearance: Int?= null
+    private var rtlLayout : Boolean = false
     var animDuration = DEFAULT_ANIM_DURATION.toLong()
 
     var isExpanded = false
@@ -84,14 +86,17 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
 
     init {
-        initView(context)
         attrs?.let {
             initAttributes(context, attrs)
         }
+        initView(context)
     }
 
     private fun initView(context: Context) {
-        LayoutInflater.from(context).inflate(R.layout.expandable_cardview, this)
+        if (rtlLayout)
+            LayoutInflater.from(context).inflate(R.layout.expandable_cardview_rtl, this)
+        else
+            LayoutInflater.from(context).inflate(R.layout.expandable_cardview, this)
     }
 
 
@@ -111,6 +116,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         cardBackgroundColor = typedArray.getColor(R.styleable.ExpandableCardView_cardBackgroundColor,Color.WHITE)
         titleTextAppearance = typedArray.getResourceId(R.styleable.ExpandableCardView_titleTextAppearance,R.style.TextAppearance_AppCompat)
         titleTextColor = typedArray.getColor(R.styleable.ExpandableCardView_titleTextColor,Color.BLACK)
+        rtlLayout = typedArray.getBoolean(R.styleable.ExpandableCardView_RTL,false)
         typedArray.recycle()
     }
 
@@ -188,6 +194,10 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         arrowDrawable?.let { arrowImage ->
             card_arrow.setImageDrawable(arrowImage)
         }
+    }
+
+    fun notifyHeightChanged(){
+        card_layout.layoutParams = LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
     private fun animateViews(initialHeight: Int, distance: Int, animationType: Int) {

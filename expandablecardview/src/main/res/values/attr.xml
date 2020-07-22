@@ -13,5 +13,6 @@
         <attr name="cardBackgroundColor" format="color"/>
         <attr name="titleTextAppearance" format="reference"/>
         <attr name="titleTextColor" format="color"/>
+        <attr name="RTL" format="boolean"/>
     </declare-styleable>
 </resources>
